@@ -4,7 +4,7 @@
     <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif" />
     <ul v-else>
       <li v-for="product in products" :key="product.id">
-        {{ product.title }} - {{ product.price }}
+        {{ product.title }} - {{ product.inventory }} - {{ product.price }}
       </li>
     </ul>
   </div>

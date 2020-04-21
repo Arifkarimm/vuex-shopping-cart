@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import shop from "@/api/shop";
-import { Promise } from "core-js";
 
 Vue.use(Vuex);
 
