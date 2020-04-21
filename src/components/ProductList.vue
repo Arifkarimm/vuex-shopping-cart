@@ -14,12 +14,12 @@ export default {
   name: "ProductList",
   computed: {
     products() {
-      return this.$store.state.products;
+      return this.$store.getters.availableProducts;
     },
   },
   created() {
     shop.getProducts((products) => {
-      this.$store.commit('setProducts', products)
+      this.$store.commit("setProducts", products);
     });
   },
 };
