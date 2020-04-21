@@ -1,8 +1,8 @@
 <template>
   <div>
     <h2>Product List</h2>
-
-    <ul>
+    <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif" />
+    <ul v-else>
       <li v-for="product in products" :key="product.id">
         {{ product.title }} - {{ product.price }}
       </li>
@@ -13,12 +13,18 @@
 <script>
 export default {
   name: "ProductList",
+  data() {
+    return {
+      loading: false,
+    };
+  },
   computed: {
     products() {
       return this.$store.getters.availableProducts;
     },
   },
   created() {
+    this.loading = true;
     this.$store.dispatch("fetchProduct").then(() => (this.loading = false));
   },
 };
