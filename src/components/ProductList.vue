@@ -1,7 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="product in products" :key="product.id">{{ product.title }} - {{ product.price }}</li>
+      <li v-for="product in products" :key="product.id">
+        {{ product.title }} - {{ product.price }}
+      </li>
     </ul>
   </div>
 </template>
@@ -10,16 +12,16 @@
 import shop from "@/api/shop";
 export default {
   name: "ProductList",
-  data() {
-    return {
-      products: []
-    };
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
   },
   created() {
-    shop.getProducts(products => {
-      this.products = products;
+    shop.getProducts((products) => {
+      this.$store.commit('setProducts', products)
     });
-  }
+  },
 };
 </script>
 
