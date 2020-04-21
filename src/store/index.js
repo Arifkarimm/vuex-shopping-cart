@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import shop from "@/api/shop";
 
 Vue.use(Vuex);
 
@@ -17,5 +18,11 @@ export default new Vuex.Store({
       state.products = products;
     },
   },
-  actions: {},
+  actions: {
+    fetchProduct: ({ commit }) => {
+      shop.getProducts((products) => {
+        commit("setProducts", products);
+      });
+    },
+  },
 });

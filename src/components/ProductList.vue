@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>Product List</h2>
+
     <ul>
       <li v-for="product in products" :key="product.id">
         {{ product.title }} - {{ product.price }}
@@ -9,7 +11,6 @@
 </template>
 
 <script>
-import shop from "@/api/shop";
 export default {
   name: "ProductList",
   computed: {
@@ -18,9 +19,7 @@ export default {
     },
   },
   created() {
-    shop.getProducts((products) => {
-      this.$store.commit("setProducts", products);
-    });
+    this.$store.dispatch("fetchProduct").then(() => (this.loading = false));
   },
 };
 </script>
