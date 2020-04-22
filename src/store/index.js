@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     cart: [],
+    checkoutStatus: null,
   },
   getters: {
     availableProducts: (state) => {
@@ -46,6 +47,12 @@ export default new Vuex.Store({
     decrementProductInventory: (state, product) => {
       product.inventory--;
     },
+    setCheckoutStatus: (state, status) => {
+      state.checkoutStatus = status;
+    },
+    emptyCart: (state) => {
+      state.cart = [];
+    },
   },
   actions: {
     fetchProduct: ({ commit }) => {
@@ -68,6 +75,18 @@ export default new Vuex.Store({
         }
         context.commit("decrementProductInventory", product);
       }
+    },
+    checkout: ({ state, commit }) => {
+      shop.buyProducts(
+        state.cart,
+        () => {
+          commit("emptyCart");
+          commit("setCheckoutStatus", "success");
+        },
+        () => {
+          commit("setCheckoutStatus", "failed");
+        }
+      );
     },
   },
 });
