@@ -11,9 +11,9 @@ export default new Vuex.Store({
     checkoutStatus: null,
   },
   getters: {
-    availableProducts: (state) => {
-      return state.products.filter((product) => product.inventory > 0);
-    },
+    // availableProducts: (state) => {
+    //   return state.products.filter((product) => product.inventory > 0);
+    // },
     cartProducts: (state) => {
       return state.cart.map((cartItem) => {
         const product = state.products.find((item) => item.id === cartItem.id);
